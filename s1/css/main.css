@@ -1,0 +1,141 @@
+*{/*selector universal*/
+	font-family: "arial";
+	color:#333;
+}
+
+body{/*selector por tagname*/
+	margin:0px;
+}
+
+
+.hidden{
+	display:none;
+}
+
+#main-header{/*selector por id*/
+	background-color:peru;
+	padding:15px;
+}
+
+.headings{/*selector por clase*/
+	font-style:italic;
+	font-weight:bold;
+	text-decoration: underline;	
+}
+
+nav {
+	background:slategray;
+	color:white;
+	padding:15px;
+} 
+
+nav ul{/*anidación*/
+	border:1px solid red;
+	list-style:none;
+	padding:0;
+}
+
+nav > ul{/*anidación directa*/
+	border:3px solid green;
+	display:flex;
+}
+
+nav > ul li{
+	padding:15px;
+}
+
+nav > ul li.active{/*combinación de selectores*/
+	background:white;
+	text-transform: uppercase;
+}
+
+nav > ul li.active ~ li{/*selector de hermanos (siblings)*/
+	padding:15px;
+	border-bottom:1px solid white;
+}
+
+nav > ul li.active + li{/*selector de hermano adyacente (next sibling)*/
+	padding:15px;
+	border-bottom:1px solid skyblue;
+}
+
+nav > ul li:hover{
+	background:#dadada;
+}
+
+nav > ul li:hover ul.hidden{
+	display:block;
+}
+
+#sub-menu li:nth-of-type(3){
+	text-align: center;
+}
+
+#sub-menu li:nth-of-type(odd){
+	background:#acacac;
+}
+
+#sub-menu li:nth-of-type(even){
+	background:skyblue;
+}
+
+main{
+	display:flex;
+	padding:15px;
+}
+
+main section, 
+main aside{
+	border:1px solid #dadada;
+	box-shadow: 5px 5px 5px #acacac;
+	border-radius:5px;
+	padding:15px;
+}
+
+main aside{
+	margin-left:15px;
+}
+
+main article:not(:last-of-type){
+	border-bottom:1px solid #dadada;
+}
+
+main article h2{
+	flex-basis:100%;
+	flex-shrink: 0;
+	font-size:16px;
+}
+
+main article figure{
+	display:flex;
+}
+
+main article figure img{
+	flex-shrink: 1;
+    width: 15%;
+    margin-right: 15px;
+}
+
+main article figure p{
+    flex-basis: 80%;
+    flex-shrink: 1;
+}
+
+article{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+footer{
+	background:#333;
+	padding:15px;
+}
+
+footer p a{
+	color:peru;
+	text-align: right;
+	display:block;
+}
+
+
+
