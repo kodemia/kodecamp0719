@@ -183,3 +183,14 @@ const getProductData = () => {
 $("#add-product").on("click",() => {
 	getProductData();
 })
+
+const loadContent = (contentUrl) => {
+	$("#content-wrapper").load(contentUrl)
+}
+
+const activeLink = (element)=>{
+	$(".nav-item").removeClass("active");
+	$(element).closest(".nav-item").addClass("active");
+}
+
+loadContent("marketplace.html");
