@@ -4,6 +4,42 @@ var asistentes = 75;
 var weAreLearning = true;
 var loosingTime = false;
 var character = "A";
+var dbContent;
+
+var database = firebase.database();
+
+var productsRef = database.ref('/products')
+
+productsRef.on("value",(snapshot)=>{
+	console.log(snapshot.val());
+	dbContent = snapshot.val();
+})
+
+const fillCatalog = () => {
+	console.log(dbContent);
+	$.each(dbContent,(key,value)=>{
+		console.log(`key ${key}, value ${value}`);
+		$("#products-wrapper").append(
+			`<div class="col-12 col-md-6 col-lg-3 mb-3">
+				<div class="card">
+					<img src="https://picsum.photos/200" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title">${value.name}</h5>
+						<p class="card-text">${value.description}</p>
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">${value.location}</li>
+						<li class="list-group-item">${value.price}</li>
+						<li class="list-group-item">Calificación del vendedor: 10</li>
+					</ul>
+					<div class="card-body">
+						<div class="btn btn-success btn-block">Comprar</div>
+					</div>
+				</div>
+			</div>`
+		)
+	});
+}
 
 var animalsArray = [
 	/*"Gato",
