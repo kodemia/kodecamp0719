@@ -13,16 +13,18 @@ var productsRef = database.ref('/products')
 productsRef.on("value",(snapshot)=>{
 	console.log(snapshot.val());
 	dbContent = snapshot.val();
+	fillCatalog();
 })
 
 const fillCatalog = () => {
 	console.log(dbContent);
+	$("#products-wrapper").empty();
 	$.each(dbContent,(key,value)=>{
 		console.log(`key ${key}, value ${value}`);
 		$("#products-wrapper").append(
 			`<div class="col-12 col-md-6 col-lg-3 mb-3">
 				<div class="card">
-					<img src="https://picsum.photos/200" class="card-img-top" alt="...">
+					<img src="${value.image}" class="card-img-top" alt="...">
 					<div class="card-body">
 						<h5 class="card-title">${value.name}</h5>
 						<p class="card-text">${value.description}</p>
@@ -206,22 +208,28 @@ const addCar = (addedObject, targetArray) => {
 var productsArray = [];
 
 const getProductData = () => {
-	let productName = $("#product-name").val();
-	let productDescription = $("#product-description").toggle();
-	let productPrice = $("#product-price").val();
-	let productLocation = $("#product-location").val();
-	let productObject = {productName, productDescription, productPrice, productLocation}
+	let name = $("#product-name").val();
+	let description = $("#product-description").val();
+	let price = $("#product-price").val();
+	let location = $("#product-location").val();
+	let image = $("#product-image").val();
+	let productObject = {name, description, price, location, image}
 	console.log(productObject);
-	productsArray.push(productObject)
-	console.log(productsArray)
+	productsRef.push(productObject)
 }
 
-$("#add-product").on("click",() => {
-	getProductData();
-})
+
 
 const loadContent = (contentUrl) => {
-	$("#content-wrapper").load(contentUrl)
+	$("#content-wrapper").load(contentUrl,() => {
+		if(contentUrl === "marketplace.html"){
+			fillCatalog();
+		} else if (contentUrl === 'upload_product.html'){
+			$("#add-product").on("click",() => {
+				getProductData();
+			})	
+		}
+	})
 }
 
 const activeLink = (element)=>{
